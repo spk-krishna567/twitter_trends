@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Trending Topics</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <button class="run-script">Click here to run the script</button>
+    <div id="results"></div>
+
+    <script>
+        $('.run-script').click(function () {
+            $.post('/run_script', function (data) {
+                var resultHtml = `<p>These are the most happening topics as on ${new Date(data.end_time)}</p>`;
+                resultHtml += `<ul>
+                    <li>${data.trend1}</li>
+                    <li>${data.trend2}</li>
+                    <li>${data.trend3}</li>
+                    <li>${data.trend4}</li>
+                    <li>${data.trend5}</li>
+                </ul>`;
+                resultHtml += `<p>The IP address used for this query was ${data.ip_address}.</p>`;
+                resultHtml += `<p>Here’s a JSON extract of this record from the MongoDB:</p><pre>${JSON.stringify(data, null, 2)}</pre>`;
+                resultHtml += `<button class="run-script">Click here to run the query again.</button>`;
+
+                $('#results').html(resultHtml);
+            });
+        });
+    </script>
+</body>
+
+</html>
