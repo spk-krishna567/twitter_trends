@@ -42,5 +42,5 @@ Before you begin, ensure you have met the following requirements:
 3. Run the script:
 
    ```bash
-   python main.py
+   python app.py
    ```
